@@ -39,7 +39,7 @@ npm install
 ```
 
 3. Configurar de la base de datos
-   Ejecutar el archivo  ``` GestorDeTareasBD.SQL ```  en el repositorio
+   Ejecutar el archivo  ``` gestortareasBD.SQL ```  en el repositorio
 
 4. Crear archivo .env
    Crear un archivo .env en la raíz del backend con las variables:
