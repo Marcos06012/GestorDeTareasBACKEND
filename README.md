@@ -39,9 +39,10 @@ npm install
 ```
 
 3. Configurar de la base de datos
+   
    Ejecutar el archivo  ``` gestortareasBD.SQL ```  en el repositorio
 
-4. Crear archivo .env
+5. Crear archivo .env
    Crear un archivo .env en la raíz del backend con las variables:
    ``` bash
    PORT=3001
@@ -53,7 +54,7 @@ npm install
    
    ```
 
-5. Ejecutar el BACKEND
+6. Ejecutar el BACKEND
     ``` npm run dev ```
    - Esto levantará el servidor en: http://localhost:3001
   
