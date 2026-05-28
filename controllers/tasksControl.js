@@ -42,29 +42,22 @@ export const obtenerTareas = async (req, res) => {
 
 
 export const actualizarTarea = async (req, res) => {
-    console.log("📥 Petición recibida en /tasks/:id para actualizar tarea");
     const tareaId = req.params.id;
-    // Validaciones básicas
-    if (!tareaId) {
-        return res.status(400).json({ message: "ID de tarea requerido" });
-    }
-
-    if (!req.body) {
-        return res.status(400).json({ message: "Cuerpo de la petición vacío" });
-    }
+    if (!tareaId) return res.status(400).json({ message: "ID de tarea requerido" });
 
     const { title, description, fechaInicio, fechaVencimiento, completed } = req.body;
 
-    // Requerir al menos un campo a actualizar
-    if (!title && !description && !fechaInicio && !fechaVencimiento) {
-        return res.status(400).json({ message: "Al menos un campo debe ser proporcionado para actualizar" });
-    }
-
     try {
-        // Usar el pool promise (async/await)
-        const [result] = await db.query(
+        const [result] = await db.query( 
             "UPDATE tasks SET title = ?, description = ?, finished_at = ?, completed = ? WHERE id = ? AND user_id = ?",
-            [title, description, fechaVencimiento, completed, tareaId, req.user.id]
+            [
+                title ?? null,
+                description ?? null,
+                fechaVencimiento ?? req.body.finished_at ?? null,  // acepta ambos nombres
+                completed,
+                tareaId,
+                req.user.id
+            ]
         );
 
         if (result.affectedRows === 0) {
