@@ -54,6 +54,7 @@ export const actualizarTarea = async (req, res) => {
                 title ?? null,
                 description ?? null,
                 (fechaVencimiento ?? req.body.finished_at)?.split('T')[0] ?? null,
+                completed,
                 tareaId,
                 req.user.id
             ]
