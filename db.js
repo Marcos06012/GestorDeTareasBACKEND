@@ -2,6 +2,9 @@ import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 dotenv.config();
 
+// LÍNEA DE DEBUG - BORRAR DESPUÉS
+console.log("MYSQL_URL:", process.env.MYSQL_URL);
+
 let db;
 
 // Si existe la URL larga (ideal para Railway en producción), nos conectamos directamente con ella
