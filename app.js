@@ -10,7 +10,18 @@ const app = express();
 
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+// CONFIGURACIÓN DE CORS EN PRODUCCIÓN
+app.use(cors({
+    origin: [
+        "https://gestor-de-tareas-frontend-xi.vercel.app", // Tu URL exacta de Vercel
+        "http://localhost:5173",                            // Por si pruebas local con Vite
+        "http://localhost:3000"                             // Por si pruebas local con React normal
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
+}));
+
 app.use(express.json());
 
 //RUTAS DE AUTENTICACIÓN
