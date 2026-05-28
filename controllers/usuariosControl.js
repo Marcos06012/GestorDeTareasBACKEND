@@ -1,4 +1,6 @@
-import db from "../db.js";
+import{db}from "../db.js";
+
+
 export const me = async (req, res) => {
     try {
         const [rows] = await db.query("SELECT id, name, email FROM users");
