@@ -1,9 +1,9 @@
-import{db}from "../db.js";
+import { db } from "../db.js";
 
 export const crearTareas = async (req, res) => {
     console.log(req.user.id)
     const { title, description, fechaInicio, fechaVencimiento } = req.body;
-    if (!title || !description || !fechaInicio || !fechaVencimiento) { 
+    if (!title || !description || !fechaInicio || !fechaVencimiento) {
         return res.status(400).json({ message: "Todos los campos son obligatorios" });
     }
 
@@ -53,7 +53,7 @@ export const actualizarTarea = async (req, res) => {
         return res.status(400).json({ message: "Cuerpo de la petición vacío" });
     }
 
-    const { title, description, fechaInicio, fechaVencimiento, completed} = req.body;
+    const { title, description, fechaInicio, fechaVencimiento, completed } = req.body;
 
     // Requerir al menos un campo a actualizar
     if (!title && !description && !fechaInicio && !fechaVencimiento) {
@@ -62,9 +62,9 @@ export const actualizarTarea = async (req, res) => {
 
     try {
         // Usar el pool promise (async/await)
-        const [result] = await db.query( 
-            "UPDATE tasks SET title = ?, description = ?, created_at = ?, finished_at = ?, completed = ? WHERE id = ? AND user_id = ?",
-            [title, description, fechaInicio, fechaVencimiento, completed, tareaId, req.user.id]
+        const [result] = await db.query(
+            "UPDATE tasks SET title = ?, description = ?, finished_at = ?, completed = ? WHERE id = ? AND user_id = ?",
+            [title, description, fechaVencimiento, completed, tareaId, req.user.id]
         );
 
         if (result.affectedRows === 0) {
@@ -90,7 +90,7 @@ export const eliminarTarea = async (req, res) => {
         // Validar usuario autenticado
         const userId = req.user && req.user.id;
         if (!userId) {
-        return res.status(401).json({ message: 'Usuario no autorizado' });
+            return res.status(401).json({ message: 'Usuario no autorizado' });
         }
 
         // Usar el pool promise (async/await) y pasar ambos parámetros
