@@ -5,3 +5,6 @@ const db = mysql.createPool({
   database: process.env.MYSQLDATABASE || process.env.MYSQL_DATABASE || process.env.DB_NAME,
   port: process.env.MYSQLPORT ? parseInt(process.env.MYSQLPORT) : 3306,
 });
+
+
+export default db;
