@@ -48,13 +48,12 @@ export const actualizarTarea = async (req, res) => {
     const { title, description, fechaInicio, fechaVencimiento, completed } = req.body;
 
     try {
-        const [result] = await db.query( 
+        const [result] = await db.query(
             "UPDATE tasks SET title = ?, description = ?, finished_at = ?, completed = ? WHERE id = ? AND user_id = ?",
             [
                 title ?? null,
                 description ?? null,
-                fechaVencimiento ?? req.body.finished_at ?? null,  // acepta ambos nombres
-                completed,
+                (fechaVencimiento ?? req.body.finished_at)?.split('T')[0] ?? null,
                 tareaId,
                 req.user.id
             ]
